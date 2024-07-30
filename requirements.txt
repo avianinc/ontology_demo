@@ -6,3 +6,6 @@ matplotlib
 networkx
 plotly
 pyvis
+Flask==2.0.1
+Flask==2.0.1
+Werkzeug==2.0.1
