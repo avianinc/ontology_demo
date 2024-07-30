@@ -1,2 +1,8 @@
 rdflib
 neo4j
+pyfuseki
+py2neo
+matplotlib
+networkx
+plotly
+pyvis
