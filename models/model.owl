@@ -1,0 +1,99 @@
+@prefix : <http://example.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+ 
+# Classes
+:Aircraft a owl:Class ;
+    rdfs:label "Aircraft" .
+ 
+:Payload a owl:Class ;
+    rdfs:label "Payload" .
+ 
+:Mission a owl:Class ;
+    rdfs:label "Mission" .
+ 
+:FuelEfficiency a owl:Class ;
+    rdfs:label "Fuel Efficiency" .
+ 
+:MissionSuccess a owl:Class ;
+    rdfs:label "Mission Success" .
+ 
+# Object Properties
+:hasPayload a owl:ObjectProperty ;
+    rdfs:domain :Aircraft ;
+    rdfs:range :Payload ;
+    rdfs:label "has payload" .
+ 
+:impactsFuelEfficiency a owl:ObjectProperty ;
+    rdfs:domain :Payload ;
+    rdfs:range :FuelEfficiency ;
+    rdfs:label "impacts fuel efficiency" .
+ 
+:impactsMissionSuccess a owl:ObjectProperty ;
+    rdfs:domain :Payload ;
+    rdfs:range :MissionSuccess ;
+    rdfs:label "impacts mission success" .
+ 
+:hasFuelEfficiency a owl:ObjectProperty ;
+    rdfs:domain :Aircraft ;
+    rdfs:range :FuelEfficiency ;
+    rdfs:label "has fuel efficiency" .
+ 
+:hasMissionSuccess a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :MissionSuccess ;
+    rdfs:label "has mission success" .
+ 
+# Data Properties
+:missionSuccessScore a owl:DatatypeProperty ;
+    rdfs:domain :MissionSuccess ;
+    rdfs:range xsd:int ;
+    rdfs:label "mission success score" .
+ 
+:fuelEfficiencyScore a owl:DatatypeProperty ;
+    rdfs:domain :FuelEfficiency ;
+    rdfs:range xsd:int ;
+    rdfs:label "fuel efficiency score" .
+ 
+# Individuals
+:Aircraft1 a :Aircraft ;
+    :hasPayload :Payload1 ;
+    :hasFuelEfficiency :FuelEfficiency1 .
+ 
+:Payload1 a :Payload ;
+    :impactsFuelEfficiency :FuelEfficiency1 ;
+    :impactsMissionSuccess :MissionSuccess1 ;
+    rdfs:label "Payload Configuration A" .
+ 
+:FuelEfficiency1 a :FuelEfficiency ;
+    :fuelEfficiencyScore 9 ;
+    rdfs:label "High Fuel Efficiency" .
+ 
+:Mission1 a :Mission ;
+    :hasMissionSuccess :MissionSuccess1 .
+ 
+:MissionSuccess1 a :MissionSuccess ;
+    :missionSuccessScore 8 ;
+    rdfs:label "Successful" .
+ 
+:Aircraft2 a :Aircraft ;
+    :hasPayload :Payload2 ;
+    :hasFuelEfficiency :FuelEfficiency2 .
+ 
+:Payload2 a :Payload ;
+    :impactsFuelEfficiency :FuelEfficiency2 ;
+    :impactsMissionSuccess :MissionSuccess2 ;
+    rdfs:label "Payload Configuration B" .
+ 
+:FuelEfficiency2 a :FuelEfficiency ;
+    :fuelEfficiencyScore 6 ;
+    rdfs:label "Moderate Fuel Efficiency" .
+ 
+:Mission2 a :Mission ;
+    :hasMissionSuccess :MissionSuccess2 .
+ 
+:MissionSuccess2 a :MissionSuccess ;
+    :missionSuccessScore 5 ;
+    rdfs:label "Moderately Successful" .

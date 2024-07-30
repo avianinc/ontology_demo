@@ -1,0 +1,25 @@
+@prefix : <http://example.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Aircraft a owl:Class ;
+    rdfs:label "Aircraft" .
+
+:Payload a owl:Class ;
+    rdfs:label "Payload" .
+
+# Object Properties
+:hasPayload a owl:ObjectProperty ;
+    rdfs:domain :Aircraft ;
+    rdfs:range :Payload ;
+    rdfs:label "has payload" .
+
+# Individuals
+:Aircraft1 a :Aircraft ;
+    :hasPayload :Payload1 .
+
+:Payload1 a :Payload ;
+    rdfs:label "Payload Configuration A" .
