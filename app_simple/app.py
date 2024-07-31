@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from neo4j import GraphDatabase
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend')
+
 driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "testpassword"))
 
 @app.route('/api/ontology', methods=['GET'])
@@ -11,9 +12,9 @@ def get_ontology():
         result = session.run("MATCH (n)-[r]->(m) RETURN n, r, m")
         data = []
         for record in result:
-            data.append({'data': {'id': record['n']['uri']}})
-            data.append({'data': {'id': record['m']['uri']}})
-            data.append({'data': {'source': record['r'].start_node['uri'], 'target': record['r'].end_node['uri']}})
+            data.append({'data': {'id': record['n']['uri']}, 'group': 'nodes'})
+            data.append({'data': {'id': record['m']['uri']}, 'group': 'nodes'})
+            data.append({'data': {'source': record['r'].start_node['uri'], 'target': record['r'].end_node['uri']}, 'group': 'edges'})
         return jsonify(data)
 
 @app.route('/api/ontology', methods=['POST'])
@@ -31,11 +32,11 @@ def add_node():
 
 @app.route('/')
 def serve_frontend():
-    return send_from_directory('frontend', 'index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
-    return send_from_directory('frontend', path)
+    return send_from_directory(app.static_folder, path)
 
 if __name__ == '__main__':
     app.run(debug=True)
